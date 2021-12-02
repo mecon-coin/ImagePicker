@@ -24,12 +24,12 @@ object IntentUtils {
      */
     @JvmStatic
     fun getGalleryIntent(context: Context, mimeTypes: Array<String>): Intent {
-        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-        //    val intent = getGalleryDocumentIntent(mimeTypes)
-        //    if (intent.resolveActivity(context.packageManager) != null) {
-        //        return intent
-        //    }
-        //}
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            val intent = getGalleryDocumentIntent(mimeTypes)
+            if (intent.resolveActivity(context.packageManager) != null) {
+                return intent
+            }
+        }
         return getLegacyGalleryPickIntent(mimeTypes)
     }
 
@@ -40,7 +40,8 @@ object IntentUtils {
      */
     private fun getGalleryDocumentIntent(mimeTypes: Array<String>): Intent {
         // Show Document Intent
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).applyImageTypes(mimeTypes)
+        // val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).applyImageTypes(mimeTypes)
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE).applyImageTypes(mimeTypes)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
