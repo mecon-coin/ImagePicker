@@ -24,12 +24,12 @@ object IntentUtils {
      */
     @JvmStatic
     fun getGalleryIntent(context: Context, mimeTypes: Array<String>): Intent {
-        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-        //    val intent = getGalleryDocumentIntent(mimeTypes)
-        //    if (intent.resolveActivity(context.packageManager) != null) {
-        //        return intent
-        //    }
-        //}
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            val intent = getGalleryDocumentIntent(mimeTypes)
+            if (intent.resolveActivity(context.packageManager) != null) {
+                return intent
+            }
+        }
         return getLegacyGalleryPickIntent(mimeTypes)
     }
 

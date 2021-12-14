@@ -108,7 +108,8 @@ class MainActivity : AppCompatActivity() {
                 mimeTypes = arrayOf(
                     "image/png",
                     "image/jpg",
-                    "image/jpeg"
+                    "image/jpeg",
+                    "image/gif"
                 )
             )
             // Image resolution will be less than 1080 x 1920

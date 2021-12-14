@@ -180,7 +180,9 @@ class ImagePickerActivity : AppCompatActivity() {
         setResult(Activity.RESULT_OK, intent)
         finish()
     }
-
+    fun setResultForGIF(uri: Uri) {
+        setResult(uri);
+    }
     /**
      * User has cancelled the task
      */

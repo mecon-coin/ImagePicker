@@ -4,10 +4,16 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.github.dhaval2404.imagepicker.ImagePickerActivity
 import com.github.dhaval2404.imagepicker.R
+import com.github.dhaval2404.imagepicker.util.FileUriUtils
 import com.github.dhaval2404.imagepicker.util.IntentUtils
+import com.j256.simplemagic.ContentInfoUtil
+import com.j256.simplemagic.ContentType
+import java.io.File
+import java.net.URL
 
 /**
  * Select image from Storage
@@ -72,6 +78,17 @@ class GalleryProvider(activity: ImagePickerActivity) :
         val uri = data?.data
         if (uri != null) {
             takePersistableUriPermission(uri)
+
+            var filePath = FileUriUtils.getRealPath(this, uri)
+            val util = ContentInfoUtil()
+            var file = File(filePath);
+            var input = file.inputStream();
+            val info = util.findMatch(input)
+            if(info.contentType == ContentType.GIF) {
+                Log.d("cropimagehandleResult", "info:${info.contentType}")
+                activity.setResultForGIF(uri)
+                return;
+            }
             activity.setImage(uri)
         } else {
             setError(R.string.error_failed_pick_gallery_image)

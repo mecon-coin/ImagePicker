@@ -125,7 +125,8 @@ public class SampleActivity extends AppCompatActivity {
 
                 .galleryMimeTypes(new String[]{"image/png",
                         "image/jpg",
-                        "image/jpeg"
+                        "image/jpeg",
+                        "image/gif"
                 })
                 // Image resolution will be less than 1080 x 1920
                 .maxResultSize(1080, 1920)
