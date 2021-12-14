@@ -85,7 +85,6 @@ class GalleryProvider(activity: ImagePickerActivity) :
             var input = file.inputStream();
             val info = util.findMatch(input)
             if(info.contentType == ContentType.GIF) {
-                Log.d("cropimagehandleResult", "info:${info.contentType}")
                 activity.setResultForGIF(uri)
                 return;
             }
